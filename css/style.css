@@ -1,18 +1,20 @@
 :root {
-    --bg-color: #0a0a0a;
-    --card-bg: #111111;
-    --text-primary: #e0e0e0;
+    --bg-color: #050505;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    /* Glassmorphism base */
+    --text-primary: #ffffff;
     --text-secondary: #a0a0a0;
-    --accent-color: #00ff41;
-    /* Cyber Green */
-    --accent-hover: #00cc33;
-    --accent-glow: rgba(0, 255, 65, 0.2);
-    --border-color: #333;
+    --accent-color: #00ffa3;
+    /* More modern teal/green */
+    --accent-hover: #00ff41;
+    --accent-glow: rgba(0, 255, 163, 0.25);
+    --border-color: rgba(255, 255, 255, 0.08);
+    /* Subtle border */
 
     --font-mono: 'Share Tech Mono', monospace;
     --font-sans: 'Inter', sans-serif;
 
-    --transition: all 0.3s ease;
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 * {
@@ -23,9 +25,13 @@
 
 body {
     background-color: var(--bg-color);
+    background-image:
+        radial-gradient(circle at 15% 50%, rgba(0, 255, 163, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(0, 100, 255, 0.05), transparent 25%);
+    background-attachment: fixed;
     color: var(--text-primary);
     font-family: var(--font-sans);
-    line-height: 1.6;
+    line-height: 1.7;
     overflow-x: hidden;
 }
 
@@ -39,6 +45,7 @@ h6 {
     font-family: var(--font-mono);
     color: #fff;
     margin-bottom: 1rem;
+    letter-spacing: -0.5px;
 }
 
 a {
@@ -59,31 +66,53 @@ ul {
 }
 
 .section-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--accent-color);
-    text-shadow: 0 0 10px var(--accent-glow);
+    letter-spacing: 4px;
+    font-weight: 300;
+    color: #fff;
+    text-shadow: none;
+    /* Cleaner look */
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-glow);
 }
 
 .btn {
     display: inline-block;
-    padding: 0.8rem 2rem;
-    background: transparent;
+    padding: 1rem 2.5rem;
+    background: rgba(0, 255, 163, 0.1);
     border: 1px solid var(--accent-color);
     color: var(--accent-color);
     font-family: var(--font-mono);
     text-transform: uppercase;
+    letter-spacing: 1px;
     cursor: pointer;
     transition: var(--transition);
+    backdrop-filter: blur(5px);
+    font-weight: bold;
 }
 
 .btn:hover {
     background: var(--accent-color);
     color: #000;
-    box-shadow: 0 0 20px var(--accent-glow);
+    box-shadow: 0 0 40px var(--accent-glow);
+    transform: translateY(-2px);
 }
 
 /* Navigation */
@@ -141,19 +170,27 @@ nav {
     text-align: center;
     padding-top: 60px;
     position: relative;
-    background: radial-gradient(circle at center, rgba(0, 255, 65, 0.05) 0%, transparent 70%);
+    /* Clean background in hero to let body gradient shine through */
+    background: transparent;
 }
 
 .hero-content h1 {
-    font-size: 4rem;
-    margin-bottom: 0.5rem;
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #fff, #a0a0a0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Standard property */
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
 .hero-content h2 {
-    font-size: 1.5rem;
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
-    font-weight: 400;
+    font-size: 1.8rem;
+    color: var(--accent-color);
+    margin-bottom: 3rem;
+    font-weight: 300;
+    letter-spacing: 2px;
 }
 
 .glitch {
@@ -162,72 +199,80 @@ nav {
 
 /* About Section */
 .about {
-    padding: 6rem 0;
+    padding: 8rem 0;
 }
 
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 5rem;
     align-items: center;
 }
 
 .about-text p {
     margin-bottom: 1.5rem;
     color: var(--text-secondary);
+    font-size: 1.1rem;
 }
 
 /* Skills Section */
 .skills {
-    padding: 6rem 0;
-    background: var(--card-bg);
+    padding: 8rem 0;
+    background: transparent;
 }
 
 .skills-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.2rem;
     justify-content: center;
 }
 
 .skill-tag {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border-color);
-    padding: 0.5rem 1.5rem;
-    border-radius: 4px;
-    color: var(--accent-color);
+    backdrop-filter: blur(10px);
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    /* Pill shape */
+    color: #fff;
     font-family: var(--font-mono);
     transition: var(--transition);
+    font-size: 0.95rem;
 }
 
 .skill-tag:hover {
     border-color: var(--accent-color);
-    background: rgba(0, 255, 65, 0.1);
-    transform: translateY(-2px);
+    background: rgba(0, 255, 163, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Projects Section */
 .projects {
-    padding: 6rem 0;
+    padding: 8rem 0;
 }
 
 .project-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    padding: 2rem;
+    backdrop-filter: blur(10px);
+    padding: 3rem;
     margin-bottom: 2rem;
     transition: var(--transition);
+    border-radius: 12px;
 }
 
 .project-card:hover {
     border-color: var(--accent-color);
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .project-title {
     color: #fff;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -236,14 +281,15 @@ nav {
 .project-tech {
     display: flex;
     gap: 1rem;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     font-size: 0.85rem;
-    color: var(--text-secondary);
+    color: var(--accent-color);
+    font-family: var(--font-mono);
 }
 
 /* Contact Section */
 .contact {
-    padding: 6rem 0;
+    padding: 8rem 0;
     text-align: center;
 }
 
@@ -252,22 +298,30 @@ nav {
     margin: 0 auto;
     display: grid;
     gap: 1.5rem;
+    background: var(--card-bg);
+    padding: 3rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
 }
 
 input,
 textarea {
     width: 100%;
-    padding: 1rem;
-    background: var(--card-bg);
+    padding: 1.2rem;
+    background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--border-color);
     color: #fff;
     font-family: var(--font-sans);
+    border-radius: 8px;
+    transition: var(--transition);
 }
 
 input:focus,
 textarea:focus {
     outline: none;
     border-color: var(--accent-color);
+    background: rgba(0, 255, 163, 0.05);
 }
 
 footer {
@@ -316,15 +370,15 @@ footer {
 
 /* Certifications */
 .certifications {
-    padding: 6rem 0;
-    background: var(--bg-color);
-    /* Darker contrast */
+    padding: 8rem 0;
+    background: transparent;
+    /* Remove solid background */
 }
 
 .cert-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 4rem;
     justify-content: center;
     align-items: start;
 }
@@ -338,34 +392,40 @@ footer {
 .cert-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    padding: 1rem;
+    backdrop-filter: blur(10px);
+    padding: 2rem;
     text-align: center;
     transition: var(--transition);
+    border-radius: 12px;
 }
 
 .cert-card:hover {
     border-color: var(--accent-color);
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 255, 163, 0.1);
 }
 
 .cert-card img {
     width: 100%;
     height: auto;
-    border-radius: 4px;
-    margin-bottom: 1.5rem;
-    border: 1px solid #333;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 .cert-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
     color: #fff;
+    font-weight: 600;
 }
 
 .cert-card p {
-    color: var(--text-secondary);
+    color: var(--accent-color);
+    font-family: var(--font-mono);
     font-size: 0.9rem;
+    letter-spacing: 0.5px;
 }
 
 /* Badge in About Section */
